@@ -20,7 +20,7 @@ class RagService {
 
     RagResponse ask(String question) {
         List<Document> documents = vectorStore.similaritySearch(
-                SearchRequest.builder().query(question).topK(4).similarityThreshold(0.65).build());
+                SearchRequest.builder().query(question).topK(4).similarityThreshold(0.35).build());
 
         String context = documents.stream()
                 .map(document -> "Source: %s\nTitle: %s\n%s".formatted(
