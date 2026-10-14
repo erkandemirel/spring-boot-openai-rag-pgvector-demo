@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: spring-boot-openai-rag-pgvector-demo
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5437/rag}
+    username: ${DB_USERNAME:rag}
+    password: ${DB_PASSWORD:rag}
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: ${OPENAI_CHAT_MODEL:gpt-5-mini}
+      embedding:
+        options:
+          model: text-embedding-3-small
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 1536
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
